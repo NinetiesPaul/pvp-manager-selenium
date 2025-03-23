@@ -10,7 +10,7 @@ the alternatives drop down should be filled with pokemon with similar typing
 """
 class SlotAlternativeTest(SetUp):
     testName = __name__.split(".")[1]
-    outcome = ""
+    outcome = "Test '" + testName + "' passed."
 
     def __init__(self):
         super().__init__(self.testName)
@@ -23,9 +23,7 @@ class SlotAlternativeTest(SetUp):
             self.driver.find_element(By.CSS_SELECTOR, ".select2-search__field").send_keys(Keys.ENTER)
 
             span_element = self.driver.find_element(By.CSS_SELECTOR, "#pokemonList_slot1_alternatives > option:nth-child(5)")
-            assert span_element.text == "0530 - Excadrill"
-
-            self.outcome = "Test '" + self.testName + "' passed."
+            assert span_element.text == "0530 - Excadrill", "Drop down doesn't have that option"
 
         except Exception as e:
             self.outcome = "Test '" + self.testName + "' failed:\n" + str(e)

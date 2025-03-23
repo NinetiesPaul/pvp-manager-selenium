@@ -10,7 +10,7 @@ that selected option should be added to the slot history drop down.
 """
 class SlotHistoryTest(SetUp):
     testName = __name__.split(".")[1]
-    outcome = ""
+    outcome = "Test '" + testName + "' passed."
 
     def __init__(self):
         super().__init__(self.testName)
@@ -27,11 +27,9 @@ class SlotHistoryTest(SetUp):
             self.driver.find_element(By.CSS_SELECTOR, ".select2-search__field").send_keys(Keys.ENTER)
 
             span_element = self.driver.find_element(By.CSS_SELECTOR, "#pokemonList_slot1_history > option:nth-child(2)")
-            assert span_element.text == "0003 - Venusaur"
-
-            self.outcome = "Test '" + self.testName + "' passed."
+            assert span_element.text == "0003 - Venusaur", "Drop down doesn't have that option"
 
         except Exception as e:
-            self.outcome = self.testName + "failed:", e
+            self.outcome = "Test '" + self.testName + "' failed:\n" + str(e)
 
         self.close(self.outcome)

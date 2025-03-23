@@ -12,7 +12,7 @@ slot1 and slot2 selected options must switch between them
 """
 class SlotSwitchTest(SetUp):
     testName = __name__.split(".")[1]
-    outcome = ""
+    outcome = "Test '" + testName + "' passed."
 
     def __init__(self):
         super().__init__(self.testName)
@@ -31,11 +31,9 @@ class SlotSwitchTest(SetUp):
             self.driver.find_element(By.CSS_SELECTOR, ".card:nth-child(4) > .btn").click()
 
             span_element = self.driver.find_element(By.CSS_SELECTOR, "#select2-pokemonList_slot1-container")
-            assert span_element.text == "0025 - Pikachu"
-
-            self.outcome = "Test '" + self.testName + "' passed."
+            assert span_element.text == "0025 - Pikachu", "Drop down doesn't have that option"
 
         except Exception as e:
-            self.outcome = self.testName + "failed:", e
+            self.outcome = "Test '" + self.testName + "' failed:\n" + str(e)
 
         self.close(self.outcome)
